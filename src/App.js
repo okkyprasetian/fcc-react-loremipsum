@@ -10,6 +10,14 @@ function App() {
   const handleSubmit = event => {
     event.preventDefault()
     setFixNum(fluidNum)
+
+    if (fixNum > 0) {
+      let newData = [...data].slice(0, fixNum)
+      setText(newData)
+    } else {
+      setText('')
+    }
+
     setFluidNum(0)
   }
 
@@ -21,6 +29,12 @@ function App() {
         <input type="number" value={fluidNum} onChange={e => { setFluidNum(e.target.value) }} />
         <input type="submit" value="Submit" />
       </form>
+
+      {text !== '' &&
+        <p>
+          {text}
+        </p>
+      }
 
     </div>
   );
