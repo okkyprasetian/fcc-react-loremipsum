@@ -11,8 +11,8 @@ function App() {
     event.preventDefault()
     setFixNum(fluidNum)
 
-    if (fixNum > 0) {
-      let newData = [...data].slice(0, fixNum)
+    if (fluidNum > 0 && fluidNum <= data.length) {
+      let newData = [...data].slice(0, fluidNum)
       setText(newData)
     } else {
       setText('')
@@ -26,14 +26,16 @@ function App() {
       <h1>TIRED OF BORING LOREM IPSUM?</h1>
       <form className="form" onSubmit={handleSubmit} >
         <span className="par">Paragraphs: </span>
-        <input type="number" value={fluidNum} onChange={e => { setFluidNum(e.target.value) }} />
+        <input type="number" max={data.length} value={fluidNum} onChange={e => { setFluidNum(e.target.value) }} />
         <input type="submit" value="Submit" />
       </form>
 
       {text !== '' &&
-        <p>
-          {text}
-        </p>
+        <div className="texts">
+          {text.map((t, idx) => {
+            return (<p className="text" key={idx}>{t}</p>)
+          })}
+        </div>
       }
 
     </div>
